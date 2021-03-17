@@ -1,0 +1,100 @@
+﻿@model Employee
+@inject IEmployeeRepository employeeRepository
+
+
+@{
+    ViewData["Title"] = "Details For "+ Model.Name;
+    var EmployImage = "";
+    if (Model.PhotoPath == string.Empty || Model.PhotoPath == null)
+    {
+        EmployImage = "/images/noimage.png";
+    }
+    else { EmployImage = "/images/" + Model.PhotoPath; }
+
+    }
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1> @Model.Name</h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top mb-3" src="@EmployImage" asp-append-version="true" />
+
+                <h4>Employee ID : @Model.Id</h4>
+                <h4>Email : @Model.Email</h4>
+                <h4>Department : @Model.Department</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Home" asp-action="index"
+                   class="btn btn-primary col-lg-2 mr-2">Back to List</a>
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-info col-lg-2 mr-2">Edit</a>
+                <a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-danger col-lg-2">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*
+    <div class="container">
+        <div class="mb-3">
+            <h2 class="alert-light">Home Detials With Basic Card</h2>
+            <h2>Employee Name : @Model.Name</h2>
+            <div class="card alert-info">
+                <div class="card-body">
+                    <div class="h3">Employee Id : @Model.Id</div>
+                    <div class="h2">
+                        <div>Employee Email : @Model.Email</div>
+                        <div>Employee Department : @Model.Department</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+*@
+
+@* <h2>Home Detials</h2>
+*@
+@*<div>
+        <h4>Employee  : @Model.Name</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Department)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Department)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
+

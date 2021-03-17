@@ -1,0 +1,22 @@
+﻿@model Employee
+
+@{
+    ViewData["Title"] = "Deleted";
+       
+    }
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header alert alert-success text-center" style="margin-bottom:0">
+                <h3> <span class="h1">@Model.Name</span> is Deleted</h3>
+            </div>
+            
+            <div class="card-footer text-center">
+                <a asp-controller="Home" asp-action="index"
+                   class="btn btn-outline-primary col-lg-4 mr-2">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+

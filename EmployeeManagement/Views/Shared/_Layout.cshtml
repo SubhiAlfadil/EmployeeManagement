@@ -1,0 +1,96 @@
+﻿@inject SignInManager<ApplicationUser> signInManager;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/CSS/StyleSheet.css" rel="stylesheet" />
+
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-light">
+            <a class="navbar-brand text-dark h2" asp-action="index" asp-controller="Home">EpmloyeeManagement</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-dark h4" asp-action="index" asp-controller="Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark h4" asp-action="create" asp-controller="Home">Create New Employee</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link bg-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manager
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="ListRoles"
+                                   asp-controller="Administration">Roles</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="ListUsers"
+                                   asp-controller="Administration">Users</a>
+                                @*<a class="dropdown-item" href="#">Something else here</a>*@
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                </ul>
+                <div class="ml-auto">
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <div>
+                            <a class="text-dark h4 my-2 my-sm-0 mr-2"
+                               asp-controller="Account" asp-action="Logout">
+                                LogOut
+                            </a>
+                            <a class="text-dark h4 my-2 my-sm-0"
+                               asp-controller="" asp-action="">
+                                @User.Identity.Name
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <a class="text-dark h4 my-2 my-sm-0 mr-2"
+                               asp-controller="Account" asp-action="Login">
+                                Login
+                            </a>
+                            <a class="text-dark h4 my-2 my-sm-0"
+                               asp-controller="Account" asp-action="Register">
+                                Register
+                            </a>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </nav>
+        <div>
+            @RenderBody()
+        </div>
+
+        <div class="modal-footer" style="display:block">Footer</div>
+    </div>
+</body>
+
+@RenderSection("script", required: false);
+</html>

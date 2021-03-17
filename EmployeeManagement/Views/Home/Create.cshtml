@@ -1,0 +1,79 @@
+﻿@model IFormEmployee
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h2>Create new employee</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" asp-controller="Home" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group hidden">
+                   <label asp-for="Id" class="control-label"></label>
+                   <input asp-for="Id" class="form-control" />
+                   <span asp-validation-for="Id" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Department" class="control-label col-lg-2"
+                       style="width:20%"></label>
+
+                <select asp-for="Department" class="btn btn-outline-light text-danger"
+                        asp-items="Html.GetEnumSelectList<Dept>()" style="width:80%;padding-right:0">
+                    <option value="">Please Select </option>
+                </select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Photo" class="col-lg-1"></label>
+                <div class="col-lg-11">
+                    <div class="custom-file">
+                        <input multiple asp-for="Photo" class="custom-file-input" />@*asp-append-version="true"*@
+                        <label class="custom-file-label">Please choose a image ... </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-action="Create" asp-controller="Home" value="Create" class="btn btn-outline-success col-lg-2 m-1" />
+                <a asp-action="Index" class="btn btn-info col-lg-2 m-1">Back to List</a>
+            </div>
+        </form>
+    </div>
+
+
+
+    @section script{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var filelabel = $(this).next('.custom-file-label');
+                    var files = $(this)[0].files;
+                    if (files.length > 1) {
+                        filelabel.html(files.length + ' Files selected');
+                    } else if (files.length == 1) {
+                        filelabel.html(files[0].name);
+                    }
+                });
+            });
+        </script>
+    }
+
+</div>
+
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
